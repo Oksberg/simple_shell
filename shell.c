@@ -12,7 +12,7 @@ int main(int argc, char *argv[], char *envp[])
 {
 	size_t n = 10;
 	char exit_program[5] = "exit", environ[5] = "env", path[10] = "/bin/";
-	char *string_input;
+	char *string_input = NULL;
 	char *agv[15];
 	ssize_t num_of_chars;
 	int i, j, k;
@@ -21,9 +21,8 @@ int main(int argc, char *argv[], char *envp[])
 
 	while (1)
 	{
-		if (isatty(0))
+		if (isatty(STDIN_FILENO))
 			write(1, "$ ", 2);
-		string_input = malloc(sizeof(char) * n);
 		num_of_chars = getline(&string_input, &n, stdin);
 		if (num_of_chars == -1)
 		{
